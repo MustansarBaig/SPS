@@ -1,0 +1,10 @@
+[{"DepartmentId":1,"Name":"Roman","Location":"Pankshin","Budget":40,"HasPrinter":true},
+{"DepartmentId":2,"Name":"Jacintha","Location":"Catumbela","Budget":12,"HasPrinter":false},
+{"DepartmentId":3,"Name":"Kare","Location":"Svoge","Budget":81,"HasPrinter":false},
+{"DepartmentId":4,"Name":"Paul","Location":"Khudoyelanskoye","Budget":49,"HasPrinter":true},
+{"DepartmentId":5,"Name":"Robbin","Location":"Lengji","Budget":67,"HasPrinter":true},
+{"DepartmentId":6,"Name":"Giavani","Location":"Velagići","Budget":37,"HasPrinter":false},
+{"DepartmentId":7,"Name":"Pietro","Location":"Huo’erqi","Budget":85,"HasPrinter":false},
+{"DepartmentId":8,"Name":"Jessie","Location":"Fréjus","Budget":86,"HasPrinter":true},
+{"DepartmentId":9,"Name":"Elnora","Location":"Imari","Budget":6,"HasPrinter":false},
+{"DepartmentId":10,"Name":"Ernaline","Location":"Bansko","Budget":57,"HasPrinter":false}]
