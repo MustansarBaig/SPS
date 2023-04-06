@@ -21,7 +21,12 @@ namespace SPSolutions.API.Services
             return await _departmentRepo.AddDepartment(department);
         }
 
-        public async Task<ICollection<Department>> Get(int employeeCount)
+        public async Task<bool> DepartmentExists(string departmentName)
+        {
+            return await _departmentRepo.DepartmentExists(departmentName); 
+        }
+
+        public async Task<IEnumerable<Department>> Get(int employeeCount)
         {
             return await _departmentRepo.GetDepartment(employeeCount);
         }

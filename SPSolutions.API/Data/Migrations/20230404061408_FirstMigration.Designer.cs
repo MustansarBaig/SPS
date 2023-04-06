@@ -11,8 +11,8 @@ using SPSolutions.API.Data;
 namespace SPSolutions.API.Data.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20230330084915_GenerateDB")]
-    partial class GenerateDB
+    [Migration("20230404061408_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,7 +22,7 @@ namespace SPSolutions.API.Data.Migrations
 
             modelBuilder.Entity("SPSolutions.API.Entities.Department", b =>
                 {
-                    b.Property<int>("DepartmentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -36,9 +36,10 @@ namespace SPSolutions.API.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("DepartmentId");
+                    b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -48,20 +49,27 @@ namespace SPSolutions.API.Data.Migrations
 
             modelBuilder.Entity("SPSolutions.API.Entities.Employee", b =>
                 {
-                    b.Property<int>("EmployeeId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<DateOnly?>("DOB")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<double>("Salary")
                         .HasColumnType("REAL");
 
-                    b.HasKey("EmployeeId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Employees");
                 });
@@ -70,7 +78,7 @@ namespace SPSolutions.API.Data.Migrations
                 {
                     b.HasOne("SPSolutions.API.Entities.Department", "Department")
                         .WithMany("Employees")
-                        .HasForeignKey("EmployeeId")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

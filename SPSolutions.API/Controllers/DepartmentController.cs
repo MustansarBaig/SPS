@@ -24,9 +24,11 @@ namespace SPSolutions.API.Controllers
             return BadRequest("Something went wrong!");
         }
 
-        [HttpPost("update")]
+        [HttpPut("update")]
         public async Task<ActionResult> UpdateDepartment([FromBody] DepartmentDto deptDto)
         {
+            if (!(await _departmentService.DepartmentExists(deptDto.Name))) return NotFound("Department not found");
+
             if (await _departmentService.Update(deptDto)) return Ok("Department updated.");
 
             return BadRequest("Something went wrong!");
@@ -42,8 +44,7 @@ namespace SPSolutions.API.Controllers
                 return Ok(departments);
             }
 
-            return BadRequest("Something went wrong!");
+            return NotFound("No such departments found.");
         }
-
     }
 }

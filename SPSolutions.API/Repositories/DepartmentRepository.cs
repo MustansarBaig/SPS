@@ -10,7 +10,6 @@ namespace SPSolutions.API.Repositories
         public DepartmentRepository(ApiContext context)
         {
             _context = context;
-
         }
         public async Task<bool> AddDepartment(Department department)
         {
@@ -22,26 +21,34 @@ namespace SPSolutions.API.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<ICollection<Department>> GetDepartment(int employeeCount)
+        public async Task<IEnumerable<Department>> GetDepartment(int employeeCount)
         {
             var departments = await _context.Departments.Include(e => e.Employees)
-            .Where(d=> d.Employees.Count >= employeeCount)
+            .Where(d => d.Employees.Count >= employeeCount)
             .ToListAsync();
 
             return departments;
         }
 
+        public async Task<bool> DepartmentExists(string departmentName)
+        {
+            var department = _context.Departments.Where(d=>d.Name == departmentName).Select(u=> u.Name);
+            if(department != null) return true;
+
+            return false;
+        }
+
         public async Task<bool> UpdateDepartment(Department department)
         {
-            var dept = await _context.Departments.Where(d=> d.Name == department.Name).FirstOrDefaultAsync();
+            var dept = await _context.Departments.Where(d => d.Name == department.Name).FirstOrDefaultAsync();
 
-            if(dept != null)
+            if (dept != null)
             {
                 dept.Budget = department.Budget;
                 dept.HasPrinter = department.HasPrinter;
             }
 
-            return await _context.SaveChangesAsync()>1;
+            return await _context.SaveChangesAsync() > 1;
         }
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using SPSolutions.API.Entities;
 
 namespace SPSolutions.API.Data
@@ -23,8 +24,13 @@ namespace SPSolutions.API.Data
             builder.Entity<Department>()
                 .HasMany(e => e.Employees)
                 .WithOne(d => d.Department)
-                .HasForeignKey(ed => ed.EmployeeId)
-                .IsRequired();
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Department>()
+            .Property(d => d.Name).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
+            builder.Entity<Department>()
+            .Property(d => d.Location).Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
         }
     }
 }

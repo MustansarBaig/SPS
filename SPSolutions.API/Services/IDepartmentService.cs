@@ -7,6 +7,7 @@ namespace SPSolutions.API.Services
     {
         public Task<bool> Add(DepartmentDto deptDto);
         public Task<bool> Update(DepartmentDto deptDto);
-        public Task<ICollection<Department>> Get(int employeeCount);
+        public Task<IEnumerable<Department>> Get(int employeeCount);
+        public Task<bool> DepartmentExists(string departmentName);
     }
 }

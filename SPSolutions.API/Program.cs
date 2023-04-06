@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SPSolutions.API.Data;
 using SPSolutions.API.Extensions;
+using SPSolutions.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Services.AddDbContext<ApiContext>(opt =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseLogingMiddleware();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -28,7 +31,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-
 app.MapControllers();
 
 using var scope = app.Services.CreateScope();
